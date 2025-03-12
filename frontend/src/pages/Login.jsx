@@ -5,7 +5,18 @@ export default function Login() {
     <div>
       <div>
         <form >
-          
+          <div>
+            Login User
+          </div>
+          <div>
+          <input placeholder='Enter Username'/>
+          </div>
+          <div>
+          <input placeholder='Enter Password'/>
+          </div>
+          <div>
+            <button type='submit'>Login</button>
+          </div>
         </form>
       </div>
     </div>
