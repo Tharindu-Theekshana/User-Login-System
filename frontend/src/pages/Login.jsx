@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import login from '../images/login.jpg'
 
 
 export default function Login() {
+
+  const [isSignup,setIsSignup] = useState(false);
+
   return (
     <div className='flex justify-center h-screen bg-purple-200'>
       <div className='  bg-white w-[600px]  place-content-center h-[400px] mt-30 shadow-lg rounded-2xl grid grid-cols-2' >
