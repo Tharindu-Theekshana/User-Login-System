@@ -57,12 +57,14 @@ export default function Login() {
       signupUsername: data.signupUsername,
       signupPassword: data.signupPassword,
       confirmPassword: data.confirmPassword});
-    setIsSignup(true);
+      alert("Signed successful! Now you can login.")
+      setIsSignup(true);
   } else {
     console.log("Login Data:", {
       loginUsername: data.loginUsername,
       loginPassword: data.loginPassword
     });
+    alert("Logged Successfully!")
   }
  
 };
