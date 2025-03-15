@@ -59,7 +59,10 @@ export default function Login() {
       confirmPassword: data.confirmPassword});
     setIsSignup(true);
   } else {
-    console.log(data.loginUsername, data.loginPassword, "login successful");
+    console.log("Login Data:", {
+      loginUsername: data.loginUsername,
+      loginPassword: data.loginPassword
+    });
   }
  
 };
