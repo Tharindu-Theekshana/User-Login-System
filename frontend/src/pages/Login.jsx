@@ -21,6 +21,7 @@ export default function Login() {
   });
 
   const [isSignup,setIsSignup] = useState(true);
+ 
   const [loginUsername,setLoginUsername] = useState("");
   const [loginPassword,setLoginPassword] = useState("");
   const [signupUsername,setSignupUsername] = useState("");
@@ -51,8 +52,11 @@ export default function Login() {
   e.preventDefault();
 
   if (!isSignup) {
-   
-    console.log(data.signupUsername, data.signupPassword, data.confirmPassword + " signUp successful");
+  
+    console.log("Sign Up Data:", {
+      signupUsername: data.signupUsername,
+      signupPassword: data.signupPassword,
+      confirmPassword: data.confirmPassword});
     setIsSignup(true);
   } else {
     console.log(data.loginUsername, data.loginPassword, "login successful");
