@@ -29,20 +29,18 @@ export default function Login() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleUsernameChange = (e) => {
-   
-    if(isSignup){
-      setLoginUsername(e.target.value);
-    }else{
+    if(!isSignup){
       setSignupUsername(e.target.value);
+    }else{
+      setLoginUsername(e.target.value);
     }
   }
 
   const handlePasswordChange = (e) => {
-
-    if(isSignup){
-      setLoginPassword(e.target.value);
-    }else{
+    if(!isSignup){
       setSignupPassword(e.target.value);
+    }else{
+      setLoginPassword(e.target.value);
     }
   }
 
