@@ -7,15 +7,15 @@ import { authService } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
-  // Changed isSignup boolean meaning to match its name
-  // true = signup form, false = login form
+
+  
   const [isSignup, setIsSignup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
 
-  // Separate schemas for login and signup
+  
   const loginSchema = yup.object().shape({
     loginUsername: yup.string().email().required("You must enter email."),
     loginPassword: yup.string().required("You must enter password").min(6, "Password must be at least 6 characters"),
@@ -27,7 +27,7 @@ export default function Login() {
     confirmPassword: yup.string().oneOf([yup.ref("signupPassword"), null], "Passwords do not match").required("You must confirm your password."),
   });
 
-  // Create separate form handling for login and signup
+  
   const { 
     register: registerLogin, 
     handleSubmit: handleSubmitLogin, 
@@ -55,10 +55,10 @@ export default function Login() {
         loginPassword: data.loginPassword
       });
       
-      // Store the token
+      
       localStorage.setItem('token', response.token);
       alert("Logged in successfully!");
-      // Redirect to dashboard or home page
+      
       navigate('/dashboard');
     } catch (error) {
       console.error('Login Error:', error);
