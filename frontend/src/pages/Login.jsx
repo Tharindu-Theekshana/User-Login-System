@@ -55,9 +55,12 @@ export default function Login() {
         loginPassword: data.loginPassword
       });
       
-      
+      console.log('Login response:', response);
       localStorage.setItem('token', response.token);
+      
+
       alert("Logged in successfully!");
+
       
       navigate('/dashboard');
     } catch (error) {
