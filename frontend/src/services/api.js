@@ -32,10 +32,12 @@ export const authService = {
   login: async (userData) => {
     console.log("Logging in with:", userData);
     const response = await api.post('/auth/login', {
-      username: userData.loginUsername,
-      password: userData.loginPassword
+        username: userData.loginUsername,
+        password: userData.loginPassword
+
     });
     return response.data;
+    
   },
 
   logout: async () => {
