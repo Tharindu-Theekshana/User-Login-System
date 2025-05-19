@@ -50,6 +50,7 @@ export default function Login() {
     setErrorMessage('');
 
     try {
+      
       const response = await authService.login({
         loginUsername: data.loginUsername,
         loginPassword: data.loginPassword
@@ -58,15 +59,15 @@ export default function Login() {
       console.log('Login response:', response);
       localStorage.setItem('token', response.token);
       
-
       alert("Logged in successfully!");
-
-      
       navigate('/dashboard');
     } catch (error) {
-      console.error('Login Error:', error);
+      console.error('Login Error Details:', error);
+      
       setErrorMessage(
-        error.response?.data?.message || 'Login failed. Please try again.'
+        error.response?.data?.message || 
+        error.response?.data?.error || 
+        'Login failed. Please check your credentials and try again.'
       );
     } finally {
       setIsLoading(false);

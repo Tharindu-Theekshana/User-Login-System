@@ -12,11 +12,16 @@ const api = axios.create({
 
 // Add token to requests if it exists
 api.interceptors.request.use((config) => {
+  // Don't add Authorization header for auth endpoints
+  if (config.url.includes('/auth/login') || config.url.includes('/auth/register')) {
+    return config;
+  }
+
   const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
-  }else {
-    delete config.headers.Authorization; 
+  } else {
+    delete config.headers.Authorization;
   }
   return config;
 });
