@@ -50,20 +50,70 @@ export default function Login() {
     setErrorMessage('');
 
     try {
-      
+      console.log('Starting login process...');
       const response = await authService.login({
         loginUsername: data.loginUsername,
         loginPassword: data.loginPassword
       });
       
-      console.log('Login response:', response);
-      localStorage.setItem('token', response.token);
-      
-      alert("Logged in successfully!");
-      navigate('/dashboard');
+      console.log('Raw Login Response:', response);
+      console.log('Admin Status in Response:', {
+        admin: response.admin,
+        isAdmin: response.isAdmin,
+        type: typeof response.admin,
+        value: response.admin
+      });
+
+      // Store all necessary data
+      if (response.token) {
+        // Clear any existing auth data
+        localStorage.clear();
+        
+        // Store new auth data
+        localStorage.setItem('token', response.token);
+        // Use admin field from response
+        const adminStatus = Boolean(response.admin);
+        console.log('Setting admin status:', { 
+          adminStatus, 
+          originalValue: response.admin,
+          type: typeof response.admin 
+        });
+        localStorage.setItem('isAdmin', String(adminStatus));
+        localStorage.setItem('userRoles', JSON.stringify(response.roles || []));
+        
+        // Verify stored values immediately
+        const storedAdmin = localStorage.getItem('isAdmin');
+        console.log('Immediately after storage:', {
+          token: localStorage.getItem('token') ? '***' : null,
+          isAdmin: storedAdmin,
+          isAdminBoolean: storedAdmin === 'true',
+          roles: localStorage.getItem('userRoles')
+        });
+
+        // Force a small delay to ensure storage is complete
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        // Double check admin status before navigation
+        const isAdminUser = storedAdmin === 'true';
+        console.log('Pre-navigation check:', {
+          isAdminUser,
+          storedAdmin,
+          responseAdmin: response.admin
+        });
+
+        if (isAdminUser) {
+          console.log('User is admin - navigating to admin dashboard');
+          navigate('/admin', { replace: true });
+        } else {
+          console.log('User is not admin - navigating to user dashboard');
+          navigate('/dashboard', { replace: true });
+        }
+      } else {
+        console.error('No token received in login response');
+        setErrorMessage('Login failed: No authentication token received');
+      }
     } catch (error) {
       console.error('Login Error Details:', error);
-      
       setErrorMessage(
         error.response?.data?.message || 
         error.response?.data?.error || 
