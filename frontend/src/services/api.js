@@ -80,7 +80,7 @@ export const authService = {
         console.error('No token received in login response');
       }
       
-      // Return the response data with isAdmin field for backward compatibility
+      
       return {
         ...response.data,
         isAdmin: response.data.admin
