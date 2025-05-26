@@ -1,6 +1,6 @@
 # User Login System
 
-A secure and feature-rich user authentication system built with React (Frontend) and Node.js (Backend). This system provides user authentication, role-based access control, and admin management capabilities.
+A secure and feature-rich user authentication system built with React (Frontend) and Spring boot (Backend). This system provides user authentication, role-based access control, and admin management capabilities.
 
 ## Features
 
